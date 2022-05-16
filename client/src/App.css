@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+  text-align: left;
+}
+
+.app {
+  font-family: "Arial";
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.main {
+
+  padding: 10px;
+  height: 60vh;
+}
