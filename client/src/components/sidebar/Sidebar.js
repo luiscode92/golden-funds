@@ -8,25 +8,30 @@ import PeopleIcon from '@mui/icons-material/People';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import AddIcon from '@mui/icons-material/Add';
-import { auth } from '../../service/firebase';
-import { Button } from 'antd';
-import { PoweroffOutlined, DownloadOutlined } from '@ant-design/icons';
+import { auth, logout } from '../../service/firebase';
 
 function Sidebar() {
+
+  const logOut = () => {
+    console.log("logout")
+    logout()
+  }
   
   return (
     <SideBarContainer>
       <div style={{ flex: "1 0 auto"}}>
-        <div style={{height:"100px"}}></div>
+        <div>
+          <img src="./logo.png" alt="logo" width={250} height={250}/>
+        </div>
         <div style={{
           backgroundColor:"red", 
           borderRadius:"50px",
           color:"white"}}>
-        <SidebarSection
-          title="Nueva Cuenta"
-          icon={<AddIcon />}
-          linkTo="/"
-         />
+          <SidebarSection
+            title="Nueva Cuenta"
+            icon={<AddIcon />}
+            linkTo="/"
+          />
         </div>
 
 
@@ -56,14 +61,12 @@ function Sidebar() {
           linkTo="/downloads"
          />
          </div>
-         <Footer>
-          <SidebarSection
-            title="Cerrar Sesion"
-            icon={<PowerSettingsNewIcon />}
-            onClick={() => auth.signOut()}
-            linkTo="/"
-          />
-         </Footer>
+        <SidebarSection
+          title="Cerrar Sesion"
+          icon={<PowerSettingsNewIcon />}
+          linkTo="/"
+          onClick={() => logout()}
+        />
          
     </SideBarContainer>
   )
@@ -84,7 +87,6 @@ const SideBarContainer = styled.div`
       width: 300px;
       top: 0px;
       height: 100vh;
-
     }
     @media (max-width: 750px) {
       font-size: 1.5rem;

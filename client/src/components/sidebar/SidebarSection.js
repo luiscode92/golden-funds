@@ -1,3 +1,4 @@
+ /* eslint-disable */
 import React from 'react'
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -10,7 +11,6 @@ function SidebarSection({
   linkTo,
   onClick
 }) {
-  console.log(title)
   return (
     <Section onClick={onClick}>
       <Link to={linkTo}> 

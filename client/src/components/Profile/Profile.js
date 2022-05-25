@@ -6,15 +6,15 @@ import {
   Button,
 } from 'antd';
 import 'antd/dist/antd.css';
-import firebase from '../../service/firebase'
+//import { firebase } from '../../service/firebase'
 
 export const Profile = () => {
-  console.log(firebase)
+  console.log("profile")
 
   const onFinish = (values) => {
     //console.log('Received values of form: ', values);
-    const usersRef = firebase.database().ref('users')
-    usersRef.push(values)
+    //const usersRef = firebase.database().ref('users')
+    //usersRef.push(values)
   };
 
   return (

@@ -6,7 +6,6 @@ import DashboardCard from './DashboardCard';
 
 
 export const Dashboard = () => {
-  console.log("dashboard")
   return (
     <DashboardContainer>
       <Card 

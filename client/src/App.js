@@ -1,33 +1,18 @@
-
-import React, { useEffect, useState } from "react";
-import firebase from './service/firebase';
-
-import Login from './components/Login'
-
-import Header from "./components/Header/Header";
+ /* eslint-disable */
+import React from "react";
 import Home from "./Home";
-import Register from "./components/Register";
+import Landing from './components/Landing/Landing'
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from '../src/service/firebase'
 
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, loading, error] = useAuthState(auth);
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-
-      setUser(user);
-    })
-  }, [])
-  
-  console.log(user);
   return (
-    <>
-        {user ? 
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <Home />
-        </div>
-       : <Register /> }
-    </>
+      <div>
+        {user ? <Home /> : <Landing />}
+      </div>
 )};
 
 export default App

@@ -1,3 +1,4 @@
+ /* eslint-disable */
 import { signInWithGoogle } from '../service/firebase';
 
 import '../App.css';

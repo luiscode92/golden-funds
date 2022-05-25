@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Sidebar from './components/sidebar/Sidebar'
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { Accounts } from './components/Accounts/Accounts';
@@ -10,8 +10,7 @@ import styled from "@emotion/styled";
 
 const Home = () => {
 
-  const Main = () => {
-    const routes = [
+    const dashboardRoutes = [
       {
         path: "/",
         main: () => (
@@ -27,9 +26,7 @@ const Home = () => {
       },
       {
         path: "/profile",
-        main: () => (
-          <Profile />
-        )
+        main: () => <Profile />
       },
       {
         path: "/contact",
@@ -45,26 +42,25 @@ const Home = () => {
       }
     ];
   
-    return (
-      <MainContainer >
-        {routes.map(route => (
-          <Route
-            key={route.path}
-            path={route.path}
-            exact={route.exact}
-            component={route.main}
-          />
-        ))}
-      </MainContainer>
-    );
-  }
+   
+  
   return (
-    <Router>
+    <div>
       <HomeContainer>
         <Sidebar />
-        <Main />
+        <MainContainer>
+          <Routes>
+            {dashboardRoutes.map(({ path, main}) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={main()}
+                />
+              ))}
+          </Routes>
+        </MainContainer>
       </HomeContainer>
-    </Router>
+    </div>
 
   
   )
