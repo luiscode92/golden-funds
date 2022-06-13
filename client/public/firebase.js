@@ -16,25 +16,22 @@ import {
     getDocs,
     collection,
     where,
-    doc,
-    getDoc,
-    updateDoc,
     addDoc,
   } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    apiKey: "AIzaSyC-Wx_tx2jQcDn-budFulL2JvV5fBLEHMc",
+    authDomain: "golden-funds.firebaseapp.com",
+    projectId: "golden-funds",
+    storageBucket: "golden-funds.appspot.com",
+    messagingSenderId: "157750851958",
+    appId: "1:157750851958:web:4675fd5cc947b723bba257",
+    measurementId: "G-PSMCB0WF8K"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -71,7 +68,6 @@ const registerWithEmailAndPassword = async (name, email, password, country, city
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    console.log(user);
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,
@@ -102,34 +98,16 @@ const logout = () => {
   signOut(auth);
 };
 
-const getUserAccountId = async (id) => {
-//  console.log("id in fb", id)
+const getUserAccountId = async (email) => {
   const colllectionRef = collection(db, "users");
-  const q = query(colllectionRef, where("uid", "==", id));
-  const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((docu) => {
-        console.log("tId fb", docu.data())
-         return "docu"
-        });
-}
-
-const updateData = async (name, email, id,phone, address,) => {
-  const data = {
-    email: email,
-    name: name,
-    phone: phone,
-    address: address,
-  }
-
-  const colllectionRef = collection(db, "users");
-  const q = query(colllectionRef, where("uid", "==", id));
+  const q = query(colllectionRef, where("", "==", email));
   const querySnapshot = await getDocs(q);
       querySnapshot.forEach((docu) => {
           const docRef = doc(db, "users", docu.id)
-          updateDoc(docRef, data)
+          updateDoc(docRef, {accountId: id, accountLink: link})
+          console.log(docu.id, " => ", docu.data());
       });
 }
-
 
 export {
   auth,
@@ -139,6 +117,4 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
-  getUserAccountId,
-  updateData,
   };

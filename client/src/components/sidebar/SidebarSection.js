@@ -2,7 +2,7 @@
 import React from 'react'
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 function SidebarSection({
@@ -13,14 +13,14 @@ function SidebarSection({
 }) {
   return (
     <Section onClick={onClick}>
-      <Link to={linkTo}> 
+      <NavLink to={linkTo} > 
           <span>
             {icon}
           </span>
           <span style={{marginLeft: '10px'}}>
             {title}
           </span>
-      </Link>
+      </NavLink>
     </Section>
   )
 }
@@ -34,6 +34,7 @@ const Section = styled.div`
   padding: 10px;
   padding-right: 2px;
   overflow: hidden;
+  margin: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-decoration: none;
@@ -41,9 +42,10 @@ const Section = styled.div`
   transition: none;
   cursor: pointer;
   &:hover {
-    background-color: grey;
-    border-radius: 25px;
-    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+
+
   }
   &.active {
     color: white;

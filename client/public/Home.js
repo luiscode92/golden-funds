@@ -74,7 +74,5 @@ const HomeContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-  margin-top: 130px;
-  width: 80%;
   background-color: #F8F9FA;
 `;

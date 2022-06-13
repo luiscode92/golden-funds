@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "dev-golden-funds",
+    "prod": "prod-goldenfunds"
+  },
+  "targets": {}
+}
