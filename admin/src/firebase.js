@@ -22,30 +22,51 @@ import {
   } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC-Wx_tx2jQcDn-budFulL2JvV5fBLEHMc",
-    authDomain: "golden-funds.firebaseapp.com",
-    projectId: "golden-funds",
-    storageBucket: "golden-funds.appspot.com",
-    messagingSenderId: "157750851958",
-    appId: "1:157750851958:web:4675fd5cc947b723bba257",
-    measurementId: "G-PSMCB0WF8K"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const addData = async (id, link, email) => {
+const addData = async (id, email) => {
     const colllectionRef = collection(db, "users");
     const q = query(colllectionRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
         querySnapshot.forEach((docu) => {
             const docRef = doc(db, "users", docu.id)
-            updateDoc(docRef, {accountId: id, accountLink: link})
+            updateDoc(docRef, {accountId: id})
             console.log(docu.id, " => ", docu.data());
         });
 }
 
+const registerWithEmailAndPassword = async (name, email, password, address, phone, accountId) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        authProvider: "local",
+        email,
+        address, 
+        phone,
+        accountId,
+        password
+      });
+      return user
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
 export {
-    addData
+    addData,
+    registerWithEmailAndPassword,
 }

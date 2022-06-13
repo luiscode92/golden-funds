@@ -1,17 +1,16 @@
  /* eslint-disable */
-import React from "react";
+import React, { useContext } from "react";
 import Home from "./Home";
-import Landing from './components/Landing/Landing'
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from '../src/service/firebase'
+import { UserContext } from "./context/UserContext";
+import Login from "./components/Login";
 
 
 const App = () => {
-  const [user, loading, error] = useAuthState(auth);
+ const {user}= useContext(UserContext)
 
   return (
       <div>
-        {user ? <Home /> : <Landing />}
+        {user ? <Home /> : <Login/>}
       </div>
 )};
 
