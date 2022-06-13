@@ -27,7 +27,6 @@ const {  Sider, Header } = Layout;
 function Sidebar() {
   const {user}= useContext(UserContext)
   const [ profileData, setProfileData ] = useState(null)
-  const goldenURL = {pathname: "https://infortts.com"}
 
   useEffect(() =>{
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
@@ -67,7 +66,7 @@ function Sidebar() {
                   title="Nueva Cuenta"
                   icon={<AddIcon />}
                   linkTo="/"
-                  onClick={() => window.open('https://goldenfunds.co/', '_blank')}
+                  onClick={() => window.open('https://goldenfunds.co/retos', '_blank')}
                 />
       
               <SidebarSection

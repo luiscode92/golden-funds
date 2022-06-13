@@ -32,7 +32,7 @@ export const Dashboard = () => {
             <Itemdescription><VerifiedOutlinedIcon style={{  verticalAlign: "middle"}} /> Alcanza tu objetivo de ganancias</Itemdescription>
             <Itemdescription><VerifiedOutlinedIcon style={{  verticalAlign: "middle"}} /> Respeta tus objetivos de trading</Itemdescription>
           </div>
-          <ButtonStyled  size='large' onClick={() => window.open('https://goldenfunds.co/', '_blank')}>Empezar evaluacion</ButtonStyled>
+          <ButtonStyled  size='large' onClick={() => window.open('https://goldenfunds.co/retos', '_blank')}>Empezar evaluacion</ButtonStyled>
         </DashboardContent>
       </DashboardContainer>
     </div>
