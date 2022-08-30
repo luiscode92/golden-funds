@@ -32,20 +32,20 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const firestore = getFirestore(app);
 
-const addData = async (id, email) => {
-    const colllectionRef = collection(db, "users");
+const updateDocEmailSent = async (email) => {
+    const colllectionRef = collection(firestore, "users");
     const q = query(colllectionRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
         querySnapshot.forEach((docu) => {
-            const docRef = doc(db, "users", docu.id)
-            updateDoc(docRef, {accountId: id})
+            const docRef = doc(firestore, "users", docu.id)
+            updateDoc(docRef, {emailSent: true})
             console.log(docu.id, " => ", docu.data());
         });
 }
 
-const registerWithEmailAndPassword = async (name, email, password, address, phone, accountId) => {
+/*const createNewUser = async (name, email, password, address, phone, accountId, emailSent) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
@@ -57,16 +57,45 @@ const registerWithEmailAndPassword = async (name, email, password, address, phon
         address, 
         phone,
         accountId,
-        password
+        password,
+        emailSent
       });
-      return user
+      return {
+        user: user,
+        isNewUser: true
+      }
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          console.log(`Email address ${email} already in use.`);
+          return {
+            user: email,
+            isNewUser: true
+          };
+        default:
+          console.log(err.message);
+          break;
+      }
     }
   };
+*/
+  const checkEmail = async (email) => {
+    getAuth()
+      .getUserByEmail(email)
+      .then((userRecord) => {
+        // See the UserRecord reference doc for the contents of userRecord.
+        console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+      })
+      .catch((error) => {
+        console.log('Error fetching user data:', error);
+      });
+  }
 
 export {
-    addData,
-    registerWithEmailAndPassword,
+ updateDocEmailSent,
+  firestore,
+  checkEmail,
+ // createNewUser,
+  auth,
+  collection,
 }

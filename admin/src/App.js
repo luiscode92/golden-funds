@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react'
 import Register from './components/Register';
 import styled from '@emotion/styled';
 import Header from './components/Header';
+import UsersTable from "./components/usersTable";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <RegisterContainer>
         <Register/>
       </RegisterContainer>
+      <UsersTableContainer>
+        <UsersTable />
+      </UsersTableContainer>
     </div>
   );
 }
@@ -28,5 +32,8 @@ const RegisterContainer = styled.div`
   border-radius: 30px;
   width: 800px;
   background-color: #F8F9FA;
-  padding: 30px
+  padding: 30px;
 `;
+const UsersTableContainer = styled.div`
+  margin-top: 100px
+`

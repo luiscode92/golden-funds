@@ -1,72 +1,65 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { Card, Tag } from 'antd';
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  MinusCircleOutlined,
+  SyncOutlined,
+} from '@ant-design/icons';
 
 function SummaryAccount( summaryAccount ) {
   const [daysObjective, setDaysObjective] = useState()
   const [dailyLoss, setDailyLosts] = useState()
   const space = " "
+  console.log("summary", summaryAccount)
+
+  const accountStatus = (current, target) => {
+    switch (current <= target) {
+      case true:
+        return "Pasado";
+        break;
+      case false:
+        return "Perdido";
+        break;
+      default:
+        return "En proceso";
+        break;
+    }
+  };
+
   const sumamryAccountData= [
       {
           key:"days",
           name: 'Operar un minimo de dias   ',
           target: Math.trunc(summaryAccount.summaryAccount[0].target),
           current: Math.trunc(summaryAccount.summaryAccount[0].current),
-          status: function(target, current) {
-            if (current >= target)
-              {
-                return true;
-              }else {
-                return false;
-              }
-          },
+          status: summaryAccount.summaryAccount[0].status
       },
       {
           key:"daily loss",
           name: "Perdida maxima permitida de $",
           current: Math.trunc(summaryAccount.summaryAccount[1].target),
           target: Math.trunc(summaryAccount.summaryAccount[1].current),
-          status: function(target, current) {
-            if (target <= current)
-              {
-                return false;
-              }else {
-                return true;
-              }
-          },
+          status: summaryAccount.summaryAccount[1].status
       },
       {
           key:"max loss",
           name: "Perdina maxima al final del dia de $",
           target: Math.trunc(summaryAccount.summaryAccount[2].target),
           current: Math.trunc(summaryAccount.summaryAccount[2].current),
-          status: function(target, current) {
-            if (target >= current)
-              {
-                return false;
-              }else {
-                return true;
-              }
-          },
+          status: summaryAccount.summaryAccount[2].status
       },
       {
           key:"profit",
           name: "Objetivo de ganancias de $ ",
           target: Math.trunc(summaryAccount.summaryAccount[3].target),
           current: Math.trunc(summaryAccount.summaryAccount[3].current),
-          status: function(target, current) {
-            if (current <= target)
-              {
-                return false;
-              }else {
-                return true;
-              }
-          },
+          status: summaryAccount.summaryAccount[3].status
       }
   ]
-
-    console.log(sumamryAccountData)
- 
 
   return (
     <Cardcontainer>
@@ -78,9 +71,15 @@ function SummaryAccount( summaryAccount ) {
           }}
         >
           <CardContent>
-            {summary.name}&nbsp;<spam style={{fontWeight: "bold"}}>{summary.target}</spam>
-            <TagContainer>{summary.status(summary.target, summary.current) ? <Tag color="success">Pasado</Tag> : <Tag color="error">En proceso</Tag>}</TagContainer>
-            </CardContent>
+            {summary.name}&nbsp;<span style={{fontWeight: "bold"}}>{summary.target}</span>
+            <TagContainer>
+              {summary.status === "success" ? 
+                <Tag color="#87d068">Pasado</Tag> 
+                : 
+                <Tag color="#f50" >Perdida</Tag>
+              }
+            </TagContainer>
+          </CardContent>
         </Card>
       )}
   </Cardcontainer>
