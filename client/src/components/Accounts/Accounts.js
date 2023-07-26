@@ -34,7 +34,6 @@ export const Accounts = () => {
       display:"flex", 
       alignItems: "center", 
       justifyContent: "center", 
-      width:"80%",
       height: "100%",
       position:" absolute"
     }}>
@@ -77,9 +76,8 @@ const StatisticsContainer = styled.div`
   justify-content: center;
   margin-bottom: 50px;
   padding: 1rem;
-  box-shadow: 1px 1px 5px 4px #D9D9D9;
+  border-radius: 30px;
   background-color: #F8F9FA;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   height: auto;
   @media (max-width: 1400px) {

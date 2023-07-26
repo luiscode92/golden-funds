@@ -75,4 +75,5 @@ export default Home;
 const HomeContainer = styled.div`
   display: flex;
   overflow-x: hidden;
+  position: relative;
 `;
