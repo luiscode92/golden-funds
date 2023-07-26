@@ -10,11 +10,10 @@ import {
   SyncOutlined,
 } from '@ant-design/icons';
 
-function SummaryAccount( summaryAccount ) {
+function SummaryAccount( ) {
   const [daysObjective, setDaysObjective] = useState()
   const [dailyLoss, setDailyLosts] = useState()
   const space = " "
-  console.log("summary", summaryAccount)
 
   const accountStatus = (current, target) => {
     switch (current <= target) {
@@ -34,30 +33,30 @@ function SummaryAccount( summaryAccount ) {
       {
           key:"days",
           name: 'Operar un minimo de dias   ',
-          target: Math.trunc(summaryAccount.summaryAccount[0].target),
-          current: Math.trunc(summaryAccount.summaryAccount[0].current),
-          status: summaryAccount.summaryAccount[0].status
+          target: "$1000",
+          current: "$1000",
+          status: "success"
       },
       {
           key:"daily loss",
           name: "Perdida maxima permitida de $",
-          current: Math.trunc(summaryAccount.summaryAccount[1].target),
-          target: Math.trunc(summaryAccount.summaryAccount[1].current),
-          status: summaryAccount.summaryAccount[1].status
+          current: "$1000",
+          target: "$1000",
+          status: "success"
       },
       {
           key:"max loss",
           name: "Perdina maxima al final del dia de $",
-          target: Math.trunc(summaryAccount.summaryAccount[2].target),
-          current: Math.trunc(summaryAccount.summaryAccount[2].current),
-          status: summaryAccount.summaryAccount[2].status
+          target: "$1000",
+          current: "$1000",
+          status: "success"
       },
       {
           key:"profit",
           name: "Objetivo de ganancias de $ ",
-          target: Math.trunc(summaryAccount.summaryAccount[3].target),
-          current: Math.trunc(summaryAccount.summaryAccount[3].current),
-          status: summaryAccount.summaryAccount[3].status
+          target: "$1000",
+          current: "$1000",
+          status: "success"
       }
   ]
 

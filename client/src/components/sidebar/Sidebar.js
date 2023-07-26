@@ -75,11 +75,6 @@ function Sidebar() {
                 linkTo="/"
               />
               <SidebarSection
-                title="Cuentas"
-                icon={<AccountBalanceWalletIcon/>}
-                linkTo="/accounts"
-              />
-              <SidebarSection
                 title="Mi Perfil"
                 icon={<PersonIcon />}
                 linkTo="/profile"

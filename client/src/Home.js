@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Sidebar from './components/sidebar/Sidebar'
 import { Dashboard } from './components/Dashboard/Dashboard';
@@ -18,6 +18,12 @@ const Home = () => {
           
         ),
         exact: true
+      },
+      {
+        path: "/dashboard",
+        main: () => (
+          <Dashboard />
+        )
       },
       {
         path: "/accounts",
@@ -46,35 +52,27 @@ const Home = () => {
    
   
   return (
-    <div>
-      <HomeContainer>
-        <Sidebar />
-        <MainContainer>
-          <Routes>
-            {dashboardRoutes.map(({ path, main}) => (
-                <Route
-                  key={path}
-                  path={path}
-                  element={main()}
-                />
-              ))}
-          </Routes>
-        </MainContainer>
-      </HomeContainer>
-    </div>
 
-  
+  <HomeContainer>
+    <Sidebar />
+    <div>
+      <Routes>
+        {dashboardRoutes.map(({ path, main}) => (
+            <Route
+              key={path}
+              path={path}
+              element={main()}
+            />
+          ))}
+      </Routes>
+    </div>  
+  </HomeContainer>  
   )
 }
 
 export default Home;
 
 const HomeContainer = styled.div`
-  display: flex
-`;
-
-const MainContainer = styled.div`
-  margin-top: 130px;
-  width: 80%;
-  background-color: #F8F9FA;
+  display: flex;
+  overflow-x: hidden;
 `;

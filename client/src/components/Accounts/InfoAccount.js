@@ -3,28 +3,28 @@ import styled from '@emotion/styled'
 import { Card, Divider } from 'antd';
 import { css } from "@emotion/react";
 
-function InfoAccount( infoAccount ) {
+function InfoAccount( ) {
 
   const infoAccountData = [
     { 
       key: "balance",
       name: "Balance",
-      data: `$ ${Math.trunc(infoAccount.infoAccount.balance)}`
+      data: `$ 1000`
     },
     {
       key:"profits", 
       name: "Profits",
-      data: `$ ${Math.trunc(infoAccount.infoAccount.profit)}`
+      data: `$ 1000`
     },
     { 
       key:"deposit",
       name: "Deposito",
-      data: `$ ${Math.trunc(infoAccount.infoAccount.deposit)}`
+      data: `$ 1000`
     },
     { 
       key: "drowdown",
       name: "Drowdown Actual",
-      data: `$ ${Math.trunc(infoAccount.infoAccount.maxDrawdown)}`
+      data: `$ 1000`
     },
   ]
 

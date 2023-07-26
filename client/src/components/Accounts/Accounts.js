@@ -16,43 +16,19 @@ import SummaryAccount from './SummaryAccount';
 
 export const Accounts = () => {
 
-  const [ infoAccount, setInfoAccount ] = useState(null)
-  const [ summaryAccount, setSummaryAccount] = useState(null)
+  const [ infoAccount, setInfoAccount ] = useState(false)
+  const [ summaryAccount, setSummaryAccount] = useState(false)
   const {user}= useContext(UserContext)
 
+
+    setTimeout(() => {
+      setInfoAccount(true);
+      setSummaryAccount(true)
+    }, "1000");
   
-  const accountInfo = (accountId) => { 
-    try {
-      fetch(`https://us-central1-dev-golden-funds.cloudfunctions.net/tradingAccount/statistics/${accountId}`, {mode: "cors"})
-        .then(statisticsResponse => statisticsResponse.json())
-        .then(data =>  setInfoAccount(data));
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
 
-  const accountSummary = async (accountId) => {
-    try {
-      fetch(`https://us-central1-dev-golden-funds.cloudfunctions.net/tradingAccount/summary/${accountId}`, {mode: "cors"})
-        .then(summaryResponse => summaryResponse.json())
-        .then(data =>  setSummaryAccount(data));
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
 
-  useEffect(() => { 
-    const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        accountInfo(doc.data().accountId)
-        accountSummary(doc.data().accountId)
-      })
-      }
-    )
-  }, [])
+ 
   return (
     <div style={{
       display:"flex", 
@@ -60,8 +36,7 @@ export const Accounts = () => {
       justifyContent: "center", 
       width:"80%",
       height: "100%",
-      position:" absolute",
-      backgroundColor:"white"
+      position:" absolute"
     }}>
 
     <AccountContainer>
@@ -70,7 +45,7 @@ export const Accounts = () => {
           <>
             <h1>Cuenta</h1>
             <StatisticsContainer>
-              <InfoAccount infoAccount={infoAccount} />   
+              <InfoAccount />   
             </StatisticsContainer> 
           </>
 
@@ -83,7 +58,7 @@ export const Accounts = () => {
             <>
               <h1>Objetivos</h1>
               <SummaryContainer>
-                <SummaryAccount summaryAccount={summaryAccount} />
+                <SummaryAccount />
               </SummaryContainer>
             </>
           
