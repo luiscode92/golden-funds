@@ -4,30 +4,18 @@ import React, {useEffect, useState, useContext} from 'react'
 import { UserContext } from '../../context/UserContext';
 import { db } from '../../service/firebase';
 import InfoAccount from './InfoAccount'
-import {
-  query,
-  collection,
-  onSnapshot,
-  where,
-
-} from "firebase/firestore";
 import SummaryAccount from './SummaryAccount';
 
 
 export const Accounts = () => {
 
   const [ infoAccount, setInfoAccount ] = useState(false)
-  const [ summaryAccount, setSummaryAccount] = useState(false)
   const {user}= useContext(UserContext)
 
 
     setTimeout(() => {
       setInfoAccount(true);
-      setSummaryAccount(true)
     }, "1000");
-  
-
-
  
   return (
     <div style={{
@@ -40,30 +28,37 @@ export const Accounts = () => {
 
     <AccountContainer>
       <div>
-      {infoAccount ? 
+      {
+        infoAccount ? 
           <>
             <h1>Cuenta</h1>
-            <StatisticsContainer>
+            <SectionContainer>
               <InfoAccount />   
-            </StatisticsContainer> 
-          </>
-
-            : 
-            <Spin />
-          }
+            </SectionContainer> 
+          </> : <Spin />
+      }
       </div>
       <div>
-          {summaryAccount ? 
-            <>
-              <h1>Objetivos</h1>
-              <SummaryContainer>
-                <SummaryAccount />
-              </SummaryContainer>
-            </>
-          
-            : 
-            <Spin /> 
-          }
+      {
+        infoAccount ? 
+          <>
+            <h1>Objetivos</h1>
+            <SectionContainer>
+              <SummaryAccount />
+            </SectionContainer>
+          </> : <Spin /> 
+      }
+      </div>
+      <div>
+      {
+        infoAccount ? 
+          <>
+            <h1>Objetivos</h1>
+            <SectionContainer>
+              <SummaryAccount />
+            </SectionContainer>
+          </> : <Spin /> 
+      }
       </div>
     </AccountContainer>
           
@@ -71,7 +66,7 @@ export const Accounts = () => {
   )
 }
 
-const StatisticsContainer = styled.div`
+const SectionContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
@@ -85,16 +80,7 @@ const StatisticsContainer = styled.div`
   }
 `;
 
-const SummaryContainer = styled.div`
-  background-color: #F8F9FA;
-  padding: 1rem;
-  width: auto;
-  height: auto;
-  @media (max-width: 1400px) {
-    height: 370px
-  }
-  box-shadow: 1px 1px 5px 4px #D9D9D9;
-`;
+
 
 const AccountContainer = styled.div`
   display: flex;

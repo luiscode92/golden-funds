@@ -55,17 +55,19 @@ const Home = () => {
 
   <HomeContainer>
     <Sidebar />
-    <div>
-      <Routes>
-        {dashboardRoutes.map(({ path, main}) => (
-            <Route
-              key={path}
-              path={path}
-              element={main()}
-            />
-          ))}
-      </Routes>
-    </div>  
+    <MainContent>
+      <RouteContainer>
+        <Routes>
+          {dashboardRoutes.map(({ path, main}) => (
+              <Route
+                key={path}
+                path={path}
+                element={main()}
+              />
+            ))}
+        </Routes>
+      </RouteContainer>
+    </MainContent>  
   </HomeContainer>  
   )
 }
@@ -76,4 +78,17 @@ const HomeContainer = styled.div`
   display: flex;
   overflow-x: hidden;
   position: relative;
+  
+`;
+
+const MainContent = styled.div`
+  overflow-y: auto;
+  height: calc(100vh - 60px); // Adjust this value based on your layout (substract the height of any fixed headers, footers, etc.)
+  width: calc(100% - 240px); // Adjust this value based on your sidebar width.
+`;
+
+const RouteContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 `;
